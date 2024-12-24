@@ -7,24 +7,24 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/g2p_en-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/g2p_en-{{ version }}.tar.gz
   sha256: 32ecb119827a3b10ea8c1197276f4ea4f44070ae56cbbd01f0f261875f556a58
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3
+    - python {{ python_min }}
   run:
     - distance >=0.1.3
     - inflect >=0.3.1
     - nltk >=3.2.4
     - numpy >=1.13.1
-    - python >=3
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -33,6 +33,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/Kyubyong/g2p
